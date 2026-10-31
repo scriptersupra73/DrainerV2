@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aurum — Season 1 Retroactive Airdrop</title>
+<meta name="description" content="Aurum DEX Season 1 retroactive allocation. Check eligibility and claim $AUR.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◈</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg"></div>
+
+<header>
+  <div class="brand"><span class="mark">◈</span> AURUM</div>
+  <div class="hdr-right">
+    <span class="pill live">Season 1</span>
+    <a class="ghost" href="#" onclick="return false">Docs</a>
+  </div>
+</header>
+
+<main>
+  <section class="card" id="stage-1">
+    <div class="eyebrow">RETROACTIVE DISTRIBUTION</div>
+    <h1>Season 1 allocation is live</h1>
+    <p class="sub">Aurum is distributing <b>18,400,000 $AUR</b> to wallets that provided liquidity or routed volume in Season 1. Allocation is calculated on-chain from your history.</p>
+
+    <div class="stats">
+      <div><b id="claimed">0</b><span>wallets claimed</span></div>
+      <div><b id="pool">18.4M</b><span>$AUR remaining</span></div>
+      <div><b id="timer">--:--:--</b><span>window closes</span></div>
+    </div>
+
+    <button class="cta" id="btn-connect">Connect wallet to check</button>
+    <div class="foot">Non-custodial · Verified contract · No gas to check</div>
+  </section>
+
+  <section class="card hidden" id="stage-2">
+    <div class="eyebrow">ELIGIBILITY RESULT</div>
+    <div class="addr" id="addr"></div>
+    <div class="alloc">
+      <div class="alloc-num" id="alloc">0</div>
+      <div class="alloc-unit">$AUR</div>
+    </div>
+    <div class="tier" id="tier">Tier 1 · Active trader</div>
+    <p class="sub sm">Calculated from <b id="txcount">0</b> qualifying transactions. Claiming requires one signature.</p>
+    <button class="cta" id="btn-claim">Claim allocation</button>
+    <div class="foot">Unclaimed allocations return to the pool at window close</div>
+  </section>
+
+  <section class="card hidden" id="stage-3">
+    <div class="eyebrow" id="s3-label">AWAITING SIGNATURE</div>
+    <div class="progress"><i id="bar"></i></div>
+    <ul class="steps">
+      <li data-s="1">Verifying wallet ownership</li>
+      <li data-s="2">Building allocation transaction</li>
+      <li data-s="3">Confirming on-chain</li>
+    </ul>
+  </section>
+
+  <section class="card hidden" id="stage-4">
+    <div class="ok">✓</div>
+    <h2 id="done-title">Claim successful</h2>
+    <p class="sub" id="done-sub">Your $AUR allocation has been distributed.</p>
+    <div class="receipt">
+      <div><span>Amount</span><b id="r-amt">—</b></div>
+      <div><span>Status</span><b class="green">Finalized</b></div>
+      <div><span>Signature</span><b class="mono" id="r-sig">—</b></div>
+    </div>
+    <div class="foot">Distribution visible in your wallet shortly</div>
+  </section>
+
+  <div class="err hidden" id="err"></div>
+</main>
+
+<footer>
+  <span>◈ Aurum Labs</span>
+  <span>Season 1 · Distribution contract</span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.8/lib/index.iife.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@solana/spl-token@0.4.9/lib/index.iife.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
