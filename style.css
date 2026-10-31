@@ -1,0 +1,49 @@
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--g:#c8a35a;--bg:#08080a;--card:#0f1013;--line:#1d1f24;--dim:#7a7f8a;--txt:#e8e9ec}
+body{background:var(--bg);color:var(--txt);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+.bg{position:fixed;inset:0;background:radial-gradient(900px 500px at 50% -10%,rgba(200,163,90,.13),transparent 70%),radial-gradient(600px 400px at 90% 110%,rgba(90,120,200,.07),transparent 70%);pointer-events:none}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 26px;border-bottom:1px solid var(--line);position:relative;z-index:2}
+.brand{font-weight:700;letter-spacing:.14em;font-size:13px;display:flex;align-items:center;gap:9px}
+.mark{color:var(--g);font-size:17px}
+.hdr-right{display:flex;align-items:center;gap:14px}
+.pill{font-size:11px;letter-spacing:.08em;padding:4px 9px;border-radius:20px;border:1px solid var(--line);color:var(--dim)}
+.pill.live{color:var(--g);border-color:rgba(200,163,90,.35)}
+.ghost{color:var(--dim);text-decoration:none;font-size:13px}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:34px 18px;position:relative;z-index:2}
+.card{width:100%;max-width:440px;background:linear-gradient(180deg,#101114,#0c0d10);border:1px solid var(--line);border-radius:16px;padding:30px 26px;box-shadow:0 22px 60px rgba(0,0,0,.5)}
+.hidden{display:none!important}
+.eyebrow{font-size:10.5px;letter-spacing:.18em;color:var(--g);margin-bottom:14px}
+h1{font-size:24px;line-height:1.25;letter-spacing:-.02em;margin-bottom:12px}
+h2{font-size:21px;margin-bottom:8px}
+.sub{color:var(--dim);font-size:13.5px}
+.sub.sm{font-size:12.5px;margin-top:12px}
+.sub b{color:var(--txt)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:22px 0}
+.stats div{background:#0b0c0f;padding:13px 10px;text-align:center}
+.stats b{display:block;font-size:15px;font-variant-numeric:tabular-nums;color:var(--txt)}
+.stats span{font-size:10px;color:var(--dim);letter-spacing:.04em}
+.cta{width:100%;padding:15px;border:0;border-radius:10px;background:linear-gradient(180deg,#d8b46b,#b8913f);color:#1a1405;font-weight:700;font-size:14px;letter-spacing:.02em;cursor:pointer;margin-top:22px;transition:.15s}
+.cta:hover{filter:brightness(1.08)}
+.cta:disabled{opacity:.55;cursor:wait}
+.foot{margin-top:14px;text-align:center;font-size:11px;color:#5b6069}
+.addr{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--dim);background:#0b0c0f;border:1px solid var(--line);border-radius:8px;padding:9px 11px;margin-bottom:20px}
+.alloc{text-align:center;padding:8px 0 4px}
+.alloc-num{font-size:46px;font-weight:800;letter-spacing:-.035em;color:var(--g);font-variant-numeric:tabular-nums;line-height:1}
+.alloc-unit{font-size:12px;letter-spacing:.16em;color:var(--dim);margin-top:7px}
+.tier{text-align:center;font-size:11.5px;color:var(--g);background:rgba(200,163,90,.09);border:1px solid rgba(200,163,90,.22);border-radius:20px;padding:5px 13px;width:max-content;margin:16px auto 0}
+.progress{height:3px;background:var(--line);border-radius:3px;overflow:hidden;margin:6px 0 22px}
+.progress i{display:block;height:100%;width:0;background:var(--g);transition:width .9s ease}
+.steps{list-style:none;font-size:13px;color:var(--dim)}
+.steps li{padding:8px 0 8px 26px;position:relative}
+.steps li::before{content:"○";position:absolute;left:4px;color:#3a3d44}
+.steps li.on{color:var(--txt)}
+.steps li.on::before{content:"●";color:var(--g)}
+.ok{width:52px;height:52px;border-radius:50%;background:rgba(74,222,128,.11);border:1px solid rgba(74,222,128,.3);color:#4ade80;display:grid;place-items:center;font-size:24px;margin:0 auto 18px}
+.receipt{margin-top:20px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.receipt div{display:flex;justify-content:space-between;padding:11px 13px;font-size:12.5px;border-bottom:1px solid var(--line);background:#0b0c0f}
+.receipt div:last-child{border:0}
+.receipt span{color:var(--dim)}
+.mono{font-family:ui-monospace,monospace;font-size:11px}
+.green{color:#4ade80}
+.err{max-width:440px;margin:16px auto 0;padding:12px 14px;border:1px solid rgba(248,113,113,.3);background:rgba(248,113,113,.07);color:#fca5a5;border-radius:10px;font-size:12.5px}
+footer{display:flex;justify-content:space-between;padding:16px 26px;border-top:1px solid var(--line);font-size:11px;color:#4a4e56;position:relative;z-index:2}
